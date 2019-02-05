@@ -1,33 +1,31 @@
-class CheckboxGroup {
+export default class CheckboxGroup {
     constructor(options) {
         this.options = {
             ...{
                 class: 'checkbox-group'
             },
             ...options
-        }
+        };
         this.init();
     }
     init() {
-        console.log('jedu');
         document.addEventListener('change', (e) => {
-            console.log('change');
             this.handleChange(e);
         });
     }
     handleChange(e) {
-        console.log(e);
         if (e.target.classList.contains(this.options.class)) {
-            this.changeInput(e.target);
+            this.change(e.target);
         }
     }
-    changeInput(input) {
+    change(input) {
         const groupId = input.getAttribute('data-group-id');
         const groupName = input.getAttribute('data-group-name');
-        const status = input.checked;
-        console.log(status);
+
         if (groupId) {
-            this.selectAll(groupId, status);
+            this.selectAll(groupId, input.checked);
+        } else {
+            this.checkGroup(groupName);
         }
     }
     selectAll(groupName, status) {
@@ -38,6 +36,10 @@ class CheckboxGroup {
     changeStatus(input, status) {
         input.checked = status;
     }
+    checkGroup(groupName) {
+        const elementId = document.querySelector('input[data-group-id="' + groupName + '"]');
+        const elements = document.querySelectorAll('input[data-group-name="' + groupName + '"]');
+        const elementsChecked = document.querySelectorAll('input:checked[data-group-name="' + groupName + '"]');
+        this.changeStatus(elementId, elements.length === elementsChecked.length);
+    }
 }
-
-let checkboxGroup = new CheckboxGroup();
