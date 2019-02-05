@@ -8,7 +8,15 @@ Simple component for a group of input checkbox
 
 ## How to use
 
-Paste to HTML page  between head tag 
+Use as import module.
+
+```
+import CheckboxGroup from 'js-checkbox-group/dist/CheckboxGroup';
+
+new CheckboxGroup();
+```
+
+In HTML page. Paste to HTML page between head tag or befor end tag body.
 
 ```
 <script src="../dist/CheckboxGroup.js</script>
@@ -16,17 +24,6 @@ Paste to HTML page  between head tag
     new CheckboxGroup.default();
 </script>
 ```
-
-Use as import module
-```
-import CheckboxGroup from 'js-checkbox-group/dist/CheckboxGroup';
-
-new CheckboxGroup();
-```
-
-For add support internet explorer add polyfill for closest.
-
-```dist/polyfillClosest.js```
 
 Example: 
 ```
