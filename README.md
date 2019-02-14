@@ -25,6 +25,25 @@ In HTML page. Paste to HTML page between head tag or befor end tag body.
 </script>
 ```
 
+## Custum Event name
+
+All of the inputs have the custom event on the change. Custom event name is ```checkBoxGroup:change```.
+
+Example how to catch custom event if to change the input
+
+**VanillaJs**
+```
+document.getElementById('inputID').addEventListener('checkBoxGroup:change', function(event) {
+    console.log(event.currentTarget.checked);
+})
+```
+**jQuery**
+```
+jQuery('body').on('checkBoxGroup:change', '#inputID', function(e) {
+    console.log(jQuery(e.currentTarget).prop('checked'));
+});
+```        
+
 Example: 
 ```
 <!DOCTYPE html>

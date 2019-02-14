@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkbox group demo</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.js"
+            integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+            crossorigin="anonymous"></script>
     <script src="../dist/CheckboxGroup.js"></script>
-    <script>
-        new CheckboxGroup.default();
-    </script>
 </head>
 <body>
     <div>
         <h3>
             <label>
                 Fruits
-                <input type="checkbox" class="checkbox-group" data-group-id="group1" value="1">
+                <input type="checkbox" class="checkbox-group" data-group-id="group1" value="1" id="input-event-catch">
             </label>
         </h3>
         <label>
@@ -49,5 +50,14 @@
             Cheetah
         </label>
     </div>
+    <script>
+        new CheckboxGroup.default();
+        document.getElementById('input-event-catch').addEventListener('checkBoxGroup:change', function(event) {
+            console.log(event.currentTarget.checked);
+        })
+        jQuery('body').on('checkBoxGroup:change', '#input-event-catch', function(e) {
+            console.log(jQuery(e.currentTarget).prop('checked'));
+        });
+    </script>
 </body>
 </html>
