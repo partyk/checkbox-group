@@ -5,7 +5,8 @@ export default class CheckboxGroup {
     constructor(options) {
         this.options = {
             ...{
-                class: 'checkbox-group'
+                class: 'checkbox-group',
+                firstInit: true
             },
             ...options
         };
@@ -16,6 +17,18 @@ export default class CheckboxGroup {
         document.addEventListener('change', (e) => {
             this.handleChange(e);
         });
+        this.firstInit();
+    }
+
+    firstInit() {
+        if (!this.options.firstInit) {
+            return;
+        }
+        const elements = document.getElementsByClassName(this.options.class);
+        if (elements.length === 0) {
+            return;
+        }
+        [].slice.call(elements).forEach(element => this.changeWrapperClass(element));
     }
 
     /**
