@@ -29,24 +29,34 @@ export default class CheckboxGroup {
             this.selectAll(groupId, input.checked);
         } else {
             this.checkGroup(groupName);
+            this.changeWrapperClass(input);
         }
     }
 
     selectAll(groupName, status) {
         document.querySelectorAll('input[data-group-name="' + groupName + '"]').forEach((e) => {
             this.changeStatus(e, status);
+            this.changeWrapperClass(e);
         });
         this.triggerChange(document.querySelector('input[data-group-id="' + groupName + '"]'));
     }
 
     changeWrapperClass(input) {
-        if (!input.closest(this.options.wrapperSelector)) {
-            return;
-        }
-        if (input.checked) {
-            input.closest(this.options.wrapperSelector).classList.add(this.options.wrapperClass);
+        const groupWrapper = input.getAttribute('data-group-wrapper');
+        const groupWrapperClass = input.getAttribute('data-group-wrapper-class');
+
+        if (input.hasAttribute('data-group-wrapper')) {
+            if (input.checked) {
+                input.closest(groupWrapper).classList.add(groupWrapperClass);
+            } else {
+                input.closest(groupWrapper).classList.remove(groupWrapperClass);
+            }
         } else {
-            input.closest(this.options.wrapperSelector).classList.remove(this.options.wrapperClass);
+            if (input.checked) {
+                input.parentElement.classList.add(groupWrapperClass);
+            } else {
+                input.parentElement.classList.remove(groupWrapperClass);
+            }
         }
     }
 

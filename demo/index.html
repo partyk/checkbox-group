@@ -8,6 +8,11 @@
             integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
             crossorigin="anonymous"></script>
     <script src="../dist/CheckboxGroup.js"></script>
+    <style>
+        .checked {
+            background-color: #f3eb52;
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -50,10 +55,11 @@
             Cheetah
         </label>
     </div>
-    <div>
+
+    <div style="margin-top: 32px">
         <h3>
             <label>
-                Wrapper class
+                Wrapper class (with data-group-wrapper)
                 <input type="checkbox" class="checkbox-group" data-group-id="group3" value="1">
             </label>
         </h3>
@@ -67,17 +73,80 @@
                         data-group-name="group3"
                         value="1"
                 >
-                Tiger
+                Adventure
             </label>
         </fieldset>
-        <label>
-            <input type="checkbox" class="checkbox-group" data-group-name="group3" value="1">
-            Sloth
-        </label>
-        <label>
-            <input type="checkbox" class="checkbox-group" data-group-name="group3" value="1">
-            Cheetah
-        </label>
+        <fieldset>
+            <label>
+                <input
+                        type="checkbox"
+                        class="checkbox-group"
+                        data-group-wrapper="fieldset"
+                        data-group-wrapper-class="checked"
+                        data-group-name="group3"
+                        value="1"
+                >
+                Anchor
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>
+                <input
+                        type="checkbox"
+                        class="checkbox-group"
+                        data-group-wrapper="fieldset"
+                        data-group-wrapper-class="checked"
+                        data-group-name="group3"
+                        value="1"
+                >
+                Singapore
+            </label>
+        </fieldset>
+    </div>
+
+    <div style="margin-top: 32px">
+        <h3>
+            <label>
+                Wrapper class (without data-group-wrapper)
+                <input type="checkbox" class="checkbox-group" data-group-id="group4" value="1">
+            </label>
+        </h3>
+        <fieldset>
+            <label>
+                <input
+                        type="checkbox"
+                        class="checkbox-group"
+                        data-group-wrapper-class="checked"
+                        data-group-name="group4"
+                        value="1"
+                >
+                Cubiculum
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>
+                <input
+                        type="checkbox"
+                        class="checkbox-group"
+                        data-group-wrapper-class="checked"
+                        data-group-name="group4"
+                        value="1"
+                >
+                Quadrata
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>
+                <input
+                        type="checkbox"
+                        class="checkbox-group"
+                        data-group-wrapper-class="checked"
+                        data-group-name="group4"
+                        value="1"
+                >
+                Nuclear vexatum iacere
+            </label>
+        </fieldset>
     </div>
     <script>
         new CheckboxGroup.default();
