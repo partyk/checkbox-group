@@ -50,6 +50,35 @@
             Cheetah
         </label>
     </div>
+    <div>
+        <h3>
+            <label>
+                Wrapper class
+                <input type="checkbox" class="checkbox-group" data-group-id="group3" value="1">
+            </label>
+        </h3>
+        <fieldset>
+            <label>
+                <input
+                        type="checkbox"
+                        class="checkbox-group"
+                        data-group-wrapper="fieldset"
+                        data-group-wrapper-class="checked"
+                        data-group-name="group3"
+                        value="1"
+                >
+                Tiger
+            </label>
+        </fieldset>
+        <label>
+            <input type="checkbox" class="checkbox-group" data-group-name="group3" value="1">
+            Sloth
+        </label>
+        <label>
+            <input type="checkbox" class="checkbox-group" data-group-name="group3" value="1">
+            Cheetah
+        </label>
+    </div>
     <script>
         new CheckboxGroup.default();
         document.getElementById('input-event-catch').addEventListener('checkBoxGroup:change', function(event) {
