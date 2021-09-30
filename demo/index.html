@@ -151,10 +151,10 @@
     <script>
         new CheckboxGroup.default();
         document.getElementById('input-event-catch').addEventListener('checkBoxGroup:change', function(event) {
-            console.log(event.currentTarget.checked);
+            console.log('Test event vanilla JS' + event.currentTarget.checked);
         })
         jQuery('body').on('checkBoxGroup:change', '#input-event-catch', function(e) {
-            console.log(jQuery(e.currentTarget).prop('checked'));
+            console.log('Test event vanilla jQuery' + jQuery(e.currentTarget).prop('checked'));
         });
     </script>
 </body>

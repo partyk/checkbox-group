@@ -1,4 +1,7 @@
 export default class CheckboxGroup {
+    /**
+     * @param options {{}}
+     */
     constructor(options) {
         this.options = {
             ...{
@@ -15,12 +18,18 @@ export default class CheckboxGroup {
         });
     }
 
+    /**
+     * @param e {Event}
+     */
     handleChange(e) {
         if (e.target.classList.contains(this.options.class)) {
             this.change(e.target);
         }
     }
 
+    /**
+     * @param input {HTMLInputElement}
+     */
     change(input) {
         const groupId = input.getAttribute('data-group-id');
         const groupName = input.getAttribute('data-group-name');
@@ -33,38 +42,44 @@ export default class CheckboxGroup {
         }
     }
 
+    /**
+     * @param groupName {String}
+     * @param status {Boolean}
+     */
     selectAll(groupName, status) {
-        document.querySelectorAll('input[data-group-name="' + groupName + '"]').forEach((e) => {
-            this.changeStatus(e, status);
-            this.changeWrapperClass(e);
+        document.querySelectorAll('input[data-group-name="' + groupName + '"]').forEach((element) => {
+            this.changeStatus(element, status);
+            this.changeWrapperClass(element);
         });
         this.triggerChange(document.querySelector('input[data-group-id="' + groupName + '"]'));
     }
 
+    /**
+     * @param input {HTMLInputElement}
+     */
     changeWrapperClass(input) {
         const groupWrapper = input.getAttribute('data-group-wrapper');
         const groupWrapperClass = input.getAttribute('data-group-wrapper-class');
 
-        if (input.hasAttribute('data-group-wrapper')) {
-            if (input.checked) {
-                input.closest(groupWrapper).classList.add(groupWrapperClass);
-            } else {
-                input.closest(groupWrapper).classList.remove(groupWrapperClass);
-            }
+        if (groupWrapper && input.closest(groupWrapper)) {
+            this.toggleClass(input.closest(groupWrapper), groupWrapperClass, input.checked);
         } else {
-            if (input.checked) {
-                input.parentElement.classList.add(groupWrapperClass);
-            } else {
-                input.parentElement.classList.remove(groupWrapperClass);
-            }
+            this.toggleClass(input.parentElement, groupWrapperClass, input.checked);
         }
     }
 
+    /**
+     * @param input {HTMLInputElement}
+     * @param status {Boolean}
+     */
     changeStatus(input, status) {
         input.checked = status;
         this.triggerChange(input);
     }
 
+    /**
+     * @param groupName {String}
+     */
     checkGroup(groupName) {
         const elementId = document.querySelector('input[data-group-id="' + groupName + '"]');
         const elements = document.querySelectorAll('input[data-group-name="' + groupName + '"]');
@@ -72,6 +87,22 @@ export default class CheckboxGroup {
         this.changeStatus(elementId, elements.length === elementsChecked.length);
     }
 
+    /**
+     * @param element {HTMLElement}
+     * @param className {String}
+     * @param add {boolean|null}
+     */
+    toggleClass(element, className = '', add = false) {
+        if (add) {
+            element.classList.add(className);
+        } else {
+            element.classList.remove(className);
+        }
+    }
+
+    /**
+     * @param input {HTMLInputElement}
+     */
     triggerChange(input) {
         // without explorer
         // const event = new Event('change');
