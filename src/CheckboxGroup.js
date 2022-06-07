@@ -61,6 +61,9 @@ export default class CheckboxGroup {
      */
     selectAll(groupName, status) {
         document.querySelectorAll('input[data-group-name="' + groupName + '"]').forEach((element) => {
+            if (element.closest(`[data-checkbox-group-skip='${groupName}']`)) {
+                return;
+            }
             this.changeStatus(element, status);
             this.changeWrapperClass(element);
         });
@@ -95,9 +98,22 @@ export default class CheckboxGroup {
      */
     checkGroup(groupName) {
         const elementId = document.querySelector('input[data-group-id="' + groupName + '"]');
-        const elements = document.querySelectorAll('input[data-group-name="' + groupName + '"]');
-        const elementsChecked = document.querySelectorAll('input:checked[data-group-name="' + groupName + '"]');
+        const elements = this.checkGroupSkip(document.querySelectorAll('input[data-group-name="' + groupName + '"]'), groupName);
+        const elementsChecked = this.checkGroupSkip(document.querySelectorAll('input:checked[data-group-name="' + groupName + '"]'), groupName);
         this.changeStatus(elementId, elements.length === elementsChecked.length);
+    }
+
+    /**
+     * @param elements {NodeList}
+     * @param groupName {String}
+     */
+    checkGroupSkip(elements, groupName) {
+        return [...elements].filter(element => {
+            if (element.closest(`[data-checkbox-group-skip='${groupName}']`)) {
+                return;
+            }
+            return element;
+        });
     }
 
     /**
